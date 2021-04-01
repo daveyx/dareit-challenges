@@ -47,10 +47,10 @@ public class MySQLConnection {
     public String toString() {
         return "MySQLConnection {" +
                 "server=" + server +
-                "user=" + user +
-                "password=" + password +
-                "database=" + database +
-                "table=" + table +
+                ", user=" + user +
+                ", password=" + password +
+                ", database=" + database +
+                ", table=" + table +
                 "}";
     }
 

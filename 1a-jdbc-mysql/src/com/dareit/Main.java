@@ -53,7 +53,7 @@ public class Main {
 //        final String table = SCANNER.next();
 //
 //        return new MySQLConnection(server, user, password, database, table);
-        return new MySQLConnection("localhost", "root", "outOfBody2012", "test", "Customer");
+        return new MySQLConnection("localhost", "kevin", "kevin", "test", "Customer");
     }
 
 }
