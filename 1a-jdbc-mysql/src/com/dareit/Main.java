@@ -1,5 +1,9 @@
 package com.dareit;
 
+import com.dareit.common.Customer;
+import com.dareit.mysql.MySQLApi;
+import com.dareit.mysql.MySQLConnection;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,8 +23,8 @@ public class Main {
         mySQLApi.createCustomer(customerToCreate);
 
         List<Customer> customerRead = mySQLApi.readCustomers();
-        System.out.println("Data from table " + mySQLConnection.table + ":");
-        customerRead.forEach(customer -> System.out.println(customer.firstName + " " + customer.lastName));
+        System.out.println("Data from table " + mySQLConnection.getTable() + ":");
+        customerRead.forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
     }
 
     private static Customer readCustomerDataFromCmdLine() {
@@ -37,18 +41,19 @@ public class Main {
     private static MySQLConnection readyMySQLConnectionFromCmdLine() {
         System.out.println("Please provide mysql connection");
 
-        System.out.println("server");
-        final String server = SCANNER.next();
-        System.out.println("user");
-        final String user = SCANNER.next();
-        System.out.println("password");
-        final String password = SCANNER.next();
-        System.out.println("database");
-        final String database = SCANNER.next();
-        System.out.println("table");
-        final String table = SCANNER.next();
-
-        return new MySQLConnection(server, user, password, database, table);
+//        System.out.println("server");
+//        final String server = SCANNER.next();
+//        System.out.println("user");
+//        final String user = SCANNER.next();
+//        System.out.println("password");
+//        final String password = SCANNER.next();
+//        System.out.println("database");
+//        final String database = SCANNER.next();
+//        System.out.println("table");
+//        final String table = SCANNER.next();
+//
+//        return new MySQLConnection(server, user, password, database, table);
+        return new MySQLConnection("localhost", "root", "outOfBody2012", "test", "Customer");
     }
 
 }

@@ -1,10 +1,19 @@
-package com.dareit;
+package com.dareit.common;
 
 
 public class Customer {
 
     final String firstName;
     final String lastName;
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 
 
     public Customer(String firstName, String lastName) {

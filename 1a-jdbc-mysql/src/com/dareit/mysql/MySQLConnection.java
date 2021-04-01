@@ -1,13 +1,34 @@
-package com.dareit;
+package com.dareit.mysql;
 
 
 public class MySQLConnection {
 
-    final String server;
-    final String user;
-    final String password;
-    final String database;
-    final String table;
+    private final String server;
+    private final String user;
+    private final String password;
+    private final String database;
+    private final String table;
+
+
+    public String getServer() {
+        return server;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getDatabase() {
+        return database;
+    }
+
+    public String getTable() {
+        return table;
+    }
 
 
     public MySQLConnection(String server,

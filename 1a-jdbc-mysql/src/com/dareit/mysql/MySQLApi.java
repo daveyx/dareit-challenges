@@ -1,4 +1,6 @@
-package com.dareit;
+package com.dareit.mysql;
+
+import com.dareit.common.Customer;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -59,10 +61,10 @@ public class MySQLApi {
             Class.forName("com.mysql.cj.jdbc.Driver");
             return DriverManager.getConnection(
                     "jdbc:mysql://" +
-                            mySQLConnection.server +
-                            "/" + mySQLConnection.database + "?"
-                            + "user=" + mySQLConnection.user +
-                            "&password=" + mySQLConnection.password +
+                            mySQLConnection.getServer() +
+                            "/" + mySQLConnection.getDatabase() + "?"
+                            + "user=" + mySQLConnection.getUser() +
+                            "&password=" + mySQLConnection.getPassword() +
                             "&autoReconnect=true");
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
@@ -73,11 +75,11 @@ public class MySQLApi {
         try {
             createCustomerTableIfNotExists();
 
-            String sql = "INSERT INTO " + mySQLConnection.database + "." + mySQLConnection.table + " (FirstName, LastName) VALUES (?,?)";
+            String sql = "INSERT INTO " + mySQLConnection.getDatabase() + "." + mySQLConnection.getTable() + " (FirstName, LastName) VALUES (?,?)";
 
             PreparedStatement preparedStatement = getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, customer.firstName);
-            preparedStatement.setString(2, customer.lastName);
+            preparedStatement.setString(1, customer.getFirstName());
+            preparedStatement.setString(2, customer.getLastName());
             preparedStatement.execute();
             preparedStatement.close();
         } catch (Exception e) {
@@ -88,9 +90,9 @@ public class MySQLApi {
 
     private void createCustomerTableIfNotExists() throws SQLException {
         DatabaseMetaData dbm = getConnection().getMetaData();
-        ResultSet tables = dbm.getTables(null, mySQLConnection.database, mySQLConnection.table, null);
+        ResultSet tables = dbm.getTables(null, mySQLConnection.getDatabase(), mySQLConnection.getTable(), null);
         if (!tables.next()) {
-            PreparedStatement create = getConnection().prepareStatement("create table " + mySQLConnection.table + "(FirstName varchar(255), LastName varchar(255))");
+            PreparedStatement create = getConnection().prepareStatement("create table " + mySQLConnection.getTable() + "(FirstName varchar(255), LastName varchar(255))");
             create.executeUpdate();
         }
     }
@@ -100,7 +102,7 @@ public class MySQLApi {
         try {
             Statement statement = getConnection().createStatement();
 
-            String sql = "SELECT * FROM " + mySQLConnection.database + "." + mySQLConnection.table;
+            String sql = "SELECT * FROM " + mySQLConnection.getDatabase() + "." + mySQLConnection.getTable();
             ResultSet rs = statement.executeQuery(sql);
             while (rs.next()) {
                 String firstName = rs.getString("FirstName");
