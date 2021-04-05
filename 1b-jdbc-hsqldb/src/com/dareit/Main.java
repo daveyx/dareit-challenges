@@ -3,10 +3,8 @@ package com.dareit;
 import com.dareit.common.Customer;
 import com.dareit.hsqldb.Api;
 import org.hsqldb.server.Server;
-import org.hsqldb.server.ServerAcl;
 import org.hsqldb.util.DatabaseManagerSwing;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 
@@ -15,7 +13,7 @@ public class Main {
     private static final Scanner SCANNER = new Scanner(System.in);
 
 
-    public static void main(String[] args) throws IOException, ServerAcl.AclFormatException {
+    public static void main(String[] args) {
         System.out.println("DareIT challenge 1 - JDBC with HSQLDB");
 
         Server server = startServer();
