@@ -13,14 +13,6 @@ public class MySQLApi extends AbstractDBApi {
     private final MySQLConnection mySQLConnection;
 
 
-    protected String getDatabase() {
-        return mySQLConnection.getDatabase();
-    }
-
-    protected String getTableName() {
-        return mySQLConnection.getDatabase() + "." + mySQLConnection.getTable();
-    }
-
     public static MySQLApi getInstance(MySQLConnection mySQLConnection) {
         if (INSTANCE == null) {
             new MySQLApi(mySQLConnection);
@@ -37,6 +29,14 @@ public class MySQLApi extends AbstractDBApi {
         } else {
             INSTANCE = null;
         }
+    }
+
+    protected String getDatabase() {
+        return mySQLConnection.getDatabase();
+    }
+
+    protected String getTableName() {
+        return mySQLConnection.getDatabase() + "." + mySQLConnection.getTable();
     }
 
     protected Connection openConnection() {

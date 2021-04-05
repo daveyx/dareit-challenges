@@ -1,7 +1,7 @@
 package com.dareit;
 
 import com.dareit.common.Customer;
-import com.dareit.hsqldb.Api;
+import com.dareit.hsqldb.HSQLDBApi;
 import org.hsqldb.server.Server;
 import org.hsqldb.util.DatabaseManagerSwing;
 
@@ -13,17 +13,17 @@ public class Main {
 
         Server server = startServer();
 
-        Api api = Api.getInstance();
+        HSQLDBApi HSQLDBApi = HSQLDBApi.getInstance();
 
         Customer newCustomer = new Customer(
                 "petr",
                 "poter"
         );
 
-        api.createCustomer(newCustomer);
+        HSQLDBApi.createCustomer(newCustomer);
 
         System.out.println("Data from table " + Customer.class.getSimpleName() + ":");
-        api.readCustomers().forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
+        HSQLDBApi.readCustomers().forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
 
         DatabaseManagerSwing.main(new String[]{
                 "--url", "jdbc:hsqldb:mem:dareitdb", "--noexit"
