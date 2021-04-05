@@ -5,13 +5,8 @@ import com.dareit.hsqldb.Api;
 import org.hsqldb.server.Server;
 import org.hsqldb.util.DatabaseManagerSwing;
 
-import java.util.Scanner;
-
 
 public class Main {
-
-    private static final Scanner SCANNER = new Scanner(System.in);
-
 
     public static void main(String[] args) {
         System.out.println("DareIT challenge 1 - JDBC with HSQLDB");
@@ -41,8 +36,8 @@ public class Main {
         Server server = new Server();
         server.setDatabasePath(0, "mem:dareitdb");
         server.setDatabaseName(0, "dareitdb");
-        server.setLogWriter(null); // can use custom writer
-        server.setErrWriter(null); // can use custom writer
+        server.setLogWriter(null);
+        server.setErrWriter(null);
         server.setSilent(true);
         server.setRestartOnShutdown(false);
         server.start();
