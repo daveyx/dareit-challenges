@@ -1,12 +1,13 @@
-# DareIT Challenge 1b - JDBC with external HSQLDB database
+# DareIT Challenge 1b - JDBC with HSQLDB inmem database
 
 ## prerequisites
+* `cd ???/scripts`
+* `./initSymLinks.sh`
 
-## how to compile and run
-* `cd ???/dareit???/bin`
-* `javac -d . ../src/com/dareit/*.java ../src/com/dareit/common/*.java`
-* `java -cp ../lib/hsqldb-2.5.1.jar:. com.dareit.Main`
-
+## how to compile and run with script
+* `cd ???/scripts`
+* `./compile.sh`
+* `./run.sh`
 
 ## resources
 `https://examples.javacodegeeks.com/enterprise-java/sql-enterprise-java/jdbc-hsqldb-tutorial/`
