@@ -1,6 +1,7 @@
 package com.dareit;
 
 import com.dareit.common.Customer;
+import com.dareit.common.CustomerDataReader;
 import com.dareit.hsqldb.HSQLDBApi;
 import org.hsqldb.server.Server;
 import org.hsqldb.util.DatabaseManagerSwing;
@@ -15,10 +16,7 @@ public class Main {
 
         HSQLDBApi hsqldbApi = HSQLDBApi.getInstance();
 
-        Customer newCustomer = new Customer(
-                "petr",
-                "poter"
-        );
+        Customer newCustomer = CustomerDataReader.readCustomerDataFromCmdLine();
 
         hsqldbApi.createCustomer(newCustomer);
 

@@ -1,6 +1,7 @@
 package com.dareit;
 
 import com.dareit.common.Customer;
+import com.dareit.common.CustomerDataReader;
 import com.dareit.mysql.MySQLApi;
 import com.dareit.mysql.MySQLConnection;
 
@@ -19,23 +20,12 @@ public class Main {
         MySQLConnection mySQLConnection = readyMySQLConnectionFromCmdLine();
         MySQLApi mySQLApi = MySQLApi.getInstance(mySQLConnection);
 
-        Customer customerToCreate = readCustomerDataFromCmdLine();
+        Customer customerToCreate = CustomerDataReader.readCustomerDataFromCmdLine();
         mySQLApi.createCustomer(customerToCreate);
 
         List<Customer> customerRead = mySQLApi.readCustomers();
         System.out.println("Data from table " + mySQLConnection.getTable() + ":");
         customerRead.forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
-    }
-
-    private static Customer readCustomerDataFromCmdLine() {
-        System.out.println("Please provide mysql connection");
-
-        System.out.println("firstName");
-        final String firstName = SCANNER.next();
-        System.out.println("lastName");
-        final String lastName = SCANNER.next();
-
-        return new Customer(firstName, lastName);
     }
 
     private static MySQLConnection readyMySQLConnectionFromCmdLine() {
