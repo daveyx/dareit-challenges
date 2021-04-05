@@ -13,17 +13,17 @@ public class Main {
 
         Server server = startServer();
 
-        HSQLDBApi HSQLDBApi = HSQLDBApi.getInstance();
+        HSQLDBApi hsqldbApi = HSQLDBApi.getInstance();
 
         Customer newCustomer = new Customer(
                 "petr",
                 "poter"
         );
 
-        HSQLDBApi.createCustomer(newCustomer);
+        hsqldbApi.createCustomer(newCustomer);
 
         System.out.println("Data from table " + Customer.class.getSimpleName() + ":");
-        HSQLDBApi.readCustomers().forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
+        hsqldbApi.readCustomers().forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
 
         DatabaseManagerSwing.main(new String[]{
                 "--url", "jdbc:hsqldb:mem:dareitdb", "--noexit"
