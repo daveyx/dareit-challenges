@@ -23,6 +23,7 @@ public class Main {
         System.out.println("Data from table " + Customer.class.getSimpleName() + ":");
         hsqldbApi.readCustomers().forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
 
+        System.setProperty("java.awt.headless", "false");
         DatabaseManagerSwing.main(new String[]{
                 "--url", "jdbc:hsqldb:mem:dareitdb", "--noexit"
         });
