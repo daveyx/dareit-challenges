@@ -6,8 +6,21 @@ import com.dareit.hsqldb.HSQLDBApi;
 import org.hsqldb.server.Server;
 import org.hsqldb.util.DatabaseManagerSwing;
 
+import java.awt.*;
+
 
 public class Main {
+
+    static {
+        try {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+            DatabaseManagerSwing.main(new String[]{
+                    "--url", "jdbc:hsqldb:mem:dareitdb", "--noexit"
+            });
+        } catch (UnsatisfiedLinkError e) {
+            System.err.println("can't open databasemanager, no graphic device available");
+        }
+    }
 
     public static void main(String[] args) {
         System.out.println("DareIT challenge 1 - JDBC with HSQLDB");
@@ -22,11 +35,6 @@ public class Main {
 
         System.out.println("Data from table " + Customer.class.getSimpleName() + ":");
         hsqldbApi.readCustomers().forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
-
-        System.setProperty("java.awt.headless", "false");
-        DatabaseManagerSwing.main(new String[]{
-                "--url", "jdbc:hsqldb:mem:dareitdb", "--noexit"
-        });
 
         server.stop();
     }
