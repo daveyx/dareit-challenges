@@ -8,6 +8,8 @@ import org.hsqldb.util.DatabaseManagerSwing;
 
 import java.awt.*;
 
+import static com.dareit.hsqldb.HSQLDBApi.startServer;
+
 
 public class Main {
 
@@ -37,19 +39,6 @@ public class Main {
         hsqldbApi.readCustomers().forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
 
         server.stop();
-    }
-
-    private static Server startServer() {
-        Server server = new Server();
-        server.setDatabasePath(0, "mem:dareitdb");
-        server.setDatabaseName(0, "dareitdb");
-        server.setLogWriter(null);
-        server.setErrWriter(null);
-        server.setSilent(true);
-        server.setRestartOnShutdown(false);
-        server.start();
-
-        return server;
     }
 
 }

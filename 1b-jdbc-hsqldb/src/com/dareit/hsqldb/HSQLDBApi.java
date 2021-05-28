@@ -2,6 +2,7 @@ package com.dareit.hsqldb;
 
 import com.dareit.common.AbstractDBApi;
 import com.dareit.common.Customer;
+import org.hsqldb.server.Server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -55,6 +56,19 @@ public class HSQLDBApi extends AbstractDBApi {
     @Override
     protected String getCreateTableStatement() {
         return CREATE_TABLE;
+    }
+
+    public static Server startServer() {
+        Server server = new Server();
+        server.setDatabasePath(0, "mem:dareitdb");
+        server.setDatabaseName(0, "dareitdb");
+        server.setLogWriter(null);
+        server.setErrWriter(null);
+        server.setSilent(true);
+        server.setRestartOnShutdown(false);
+        server.start();
+
+        return server;
     }
 
 }
