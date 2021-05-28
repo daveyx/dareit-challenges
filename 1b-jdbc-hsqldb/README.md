@@ -6,6 +6,7 @@
 
 ## how to compile and run with script
 * `cd ???/scripts`
+* `./initSymlinks.sh`
 * `./compile.sh`
 * `./run.sh`
 
