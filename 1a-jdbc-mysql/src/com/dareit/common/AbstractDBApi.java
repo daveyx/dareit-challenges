@@ -55,13 +55,24 @@ public abstract class AbstractDBApi {
     }
 
     private void createCustomerTableIfNotExists() throws SQLException {
+        boolean tableExists = false;
+
         DatabaseMetaData dbm = getConnection().getMetaData();
-        ResultSet tables = dbm.getTables(null, getDatabase(), Customer.class.getSimpleName(), null);
-        if (!tables.next()) {
-            PreparedStatement create = getConnection().prepareStatement("create table " + Customer.class.getSimpleName() + "(FirstName varchar(255), LastName varchar(255))");
+        String[] TABLE_AND_VIEW_TYPES = {"TABLE","VIEW"};
+        ResultSet tables = dbm.getTables(null, getDatabase(), null, TABLE_AND_VIEW_TYPES );
+        while (tables.next()) {
+            if (Customer.class.getSimpleName().equalsIgnoreCase(tables.getString("TABLE_NAME"))) {
+                tableExists = true;
+            }
+        }
+
+        if (!tableExists) {
+            PreparedStatement create = getConnection().prepareStatement(getCreateTableStatement());
             create.executeUpdate();
         }
     }
+
+    protected abstract String getCreateTableStatement();
 
     public List<Customer> readCustomers() {
         List<Customer> customersRead = new ArrayList<>();

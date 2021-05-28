@@ -9,6 +9,11 @@ import java.sql.DriverManager;
 
 public class HSQLDBApi extends AbstractDBApi {
 
+    private static final String CREATE_TABLE =
+            "CREATE TABLE "
+                    + Customer.class.getSimpleName()
+                    + "(Id BIGINT NOT NULL IDENTITY, FirstName VARCHAR(255), LastName VARCHAR(255))";
+
     private static HSQLDBApi INSTANCE;
 
 
@@ -29,7 +34,7 @@ public class HSQLDBApi extends AbstractDBApi {
     }
 
     protected String getDatabase() {
-        return "dareitdb";
+        return null;
     }
 
     protected String getTableName() {
@@ -45,6 +50,11 @@ public class HSQLDBApi extends AbstractDBApi {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @Override
+    protected String getCreateTableStatement() {
+        return CREATE_TABLE;
     }
 
 }

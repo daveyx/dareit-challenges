@@ -1,12 +1,18 @@
 package com.dareit.mysql;
 
 import com.dareit.common.AbstractDBApi;
+import com.dareit.common.Customer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 
 public class MySQLApi extends AbstractDBApi {
+
+    private static final String CREATE_TABLE =
+            "CREATE TABLE "
+                    + Customer.class.getSimpleName()
+                    + "(Id BIGINT(11) NOT NULL AUTO_INCREMENT, FirstName VARCHAR(255), LastName VARCHAR(255), PRIMARY KEY (Id))";
 
     private static MySQLApi INSTANCE;
 
@@ -52,6 +58,11 @@ public class MySQLApi extends AbstractDBApi {
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
+    }
+
+    @Override
+    protected String getCreateTableStatement() {
+        return CREATE_TABLE;
     }
 
 }
