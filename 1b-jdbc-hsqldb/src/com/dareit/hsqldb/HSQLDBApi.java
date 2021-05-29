@@ -3,7 +3,9 @@ package com.dareit.hsqldb;
 import com.dareit.common.AbstractDBApi;
 import com.dareit.common.Customer;
 import org.hsqldb.server.Server;
+import org.hsqldb.util.DatabaseManagerSwing;
 
+import java.awt.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
@@ -69,6 +71,17 @@ public class HSQLDBApi extends AbstractDBApi {
         server.start();
 
         return server;
+    }
+
+    public static void startDatabaseManager() {
+        try {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
+            DatabaseManagerSwing.main(new String[]{
+                    "--url", "jdbc:hsqldb:mem:dareitdb", "--noexit"
+            });
+        } catch (UnsatisfiedLinkError e) {
+            System.err.println("can't open databasemanager, no graphic device available");
+        }
     }
 
 }
