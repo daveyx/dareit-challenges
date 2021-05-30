@@ -1,12 +1,9 @@
 package com.dareit;
 
-import com.dareit.common.Customer;
-import com.dareit.common.CustomerDataReader;
+import com.dareit.common.CustomerService;
+import com.dareit.common.ICustomerDBApi;
 import com.dareit.mysql.CommandLineReader;
 import com.dareit.mysql.MySQLApi;
-import com.dareit.mysql.MySQLConnection;
-
-import java.util.List;
 
 
 public class Main {
@@ -14,15 +11,12 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("DareIT challenge 1 - JDBC with MySQL");
 
-        MySQLConnection mySQLConnection = CommandLineReader.readyMySQLConnectionFromCmdLine();
-        MySQLApi mySQLApi = MySQLApi.getInstance(mySQLConnection);
+        CustomerService customerService = new CustomerService(getDBApi());
+        customerService.process();
+    }
 
-        Customer customerToCreate = CustomerDataReader.readCustomerDataFromCmdLine();
-        mySQLApi.createCustomer(customerToCreate);
-
-        List<Customer> customerRead = mySQLApi.readCustomers();
-        System.out.println("Data from table " + mySQLConnection.getTable() + ":");
-        customerRead.forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
+    private static ICustomerDBApi getDBApi() {
+        return MySQLApi.getInstance(CommandLineReader.readyMySQLConnectionFromCmdLine());
     }
 
 }

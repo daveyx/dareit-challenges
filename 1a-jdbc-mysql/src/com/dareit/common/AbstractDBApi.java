@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public abstract class AbstractDBApi implements IDBApi {
+public abstract class AbstractDBApi implements ICustomerDBApi {
 
     private Connection connection;
 
