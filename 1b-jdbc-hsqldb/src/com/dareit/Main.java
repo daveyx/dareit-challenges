@@ -11,7 +11,7 @@ import static com.dareit.hsqldb.HSQLDBApi.startServer;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("DareIT challenge 1 - JDBC with HSQLDB");
+        System.out.println("DareIT challenge 1b - JDBC with HSQLDB");
 
         Server server = startServer();
         HSQLDBApi.startDatabaseManager();

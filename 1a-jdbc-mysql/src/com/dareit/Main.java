@@ -9,7 +9,7 @@ import com.dareit.mysql.MySQLApi;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("DareIT challenge 1 - JDBC with MySQL");
+        System.out.println("DareIT challenge 1a - JDBC with MySQL");
 
         CustomerService customerService = new CustomerService(getDBApi());
         customerService.process();
