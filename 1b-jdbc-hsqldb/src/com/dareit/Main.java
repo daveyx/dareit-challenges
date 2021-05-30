@@ -1,7 +1,7 @@
 package com.dareit;
 
-import com.dareit.common.Customer;
-import com.dareit.common.CustomerDataReader;
+import com.dareit.common.CustomerService;
+import com.dareit.common.ICustomerDBApi;
 import com.dareit.hsqldb.HSQLDBApi;
 import org.hsqldb.server.Server;
 
@@ -14,19 +14,17 @@ public class Main {
         System.out.println("DareIT challenge 1 - JDBC with HSQLDB");
 
         Server server = startServer();
-
-        HSQLDBApi hsqldbApi = HSQLDBApi.getInstance();
-
-        Customer newCustomer = CustomerDataReader.readCustomerDataFromCmdLine();
-
-        hsqldbApi.createCustomer(newCustomer);
-
-        System.out.println("Data from table " + Customer.class.getSimpleName() + ":");
-        hsqldbApi.readCustomers().forEach(customer -> System.out.println(customer.getFirstName() + " " + customer.getLastName()));
-
         HSQLDBApi.startDatabaseManager();
 
+        CustomerService customerService = new CustomerService(getDBApi());
+        customerService.process();
+
         server.stop();
+    }
+
+
+    private static ICustomerDBApi getDBApi() {
+        return HSQLDBApi.getInstance();
     }
 
 }
