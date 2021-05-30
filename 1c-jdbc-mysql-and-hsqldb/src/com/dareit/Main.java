@@ -20,7 +20,7 @@ public class Main {
 
 
     public static void main(String[] args) {
-        System.out.println("DareIT challenge 1c - JDBC with HSQLDB");
+        System.out.println("DareIT challenge 1c - JDBC with MySQL or HSQLDB");
         DatabaseSelection databaseSelection = getDatabaseSelection();
 
         CustomerService customerService = new CustomerService(getDBApi(databaseSelection));
