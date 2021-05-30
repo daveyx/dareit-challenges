@@ -1,9 +1,11 @@
 package com.dareit;
 
-import com.dareit.common.IDBApi;
+import com.dareit.common.CustomerService;
+import com.dareit.common.ICustomerDBApi;
 import com.dareit.hsqldb.HSQLDBApi;
 import com.dareit.mysql.CommandLineReader;
 import com.dareit.mysql.MySQLApi;
+import org.hsqldb.server.Server;
 
 import java.util.Scanner;
 
@@ -14,18 +16,27 @@ public class Main {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    private static Server HSQLDB_SERVER;
+
+
     public static void main(String[] args) {
+        System.out.println("DareIT challenge 1c - JDBC with HSQLDB");
         DatabaseSelection databaseSelection = getDatabaseSelection();
 
-        IDBApi dbApi = getDBApi(databaseSelection);
+        CustomerService customerService = new CustomerService(getDBApi(databaseSelection));
+        customerService.process();
+
+        if (HSQLDB_SERVER != null) {
+            HSQLDB_SERVER.stop();
+        }
     }
 
-    private static IDBApi getDBApi(DatabaseSelection databaseSelection) {
+    private static ICustomerDBApi getDBApi(DatabaseSelection databaseSelection) {
         switch (databaseSelection) {
             case MySQL:
                 return MySQLApi.getInstance(CommandLineReader.readyMySQLConnectionFromCmdLine());
             case HSQLDB:
-                startServer();
+                HSQLDB_SERVER = startServer();
                 return HSQLDBApi.getInstance();
             default: throw new IllegalArgumentException();
         }
